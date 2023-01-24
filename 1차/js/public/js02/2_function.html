@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <table border="1" id="saramTable"></table>
+
+    <script>
+
+        function Saram(name, job) {
+            this.name = name;
+            this.job = job;
+            // 생성자 안에 선언하면 모든 객체에 복제됨
+            // this.mkRow = function() {
+            //     return `<td>${this.name}</td><td>${this.job}</td>`;
+            // }
+        }
+
+        //prototype 공통 프로퍼티에 하나만 선언 된다.
+        Saram.prototype.mkRow = function() {
+            return `<td>${this.name}</td><td>${this.job}</td>`;
+        }
+
+        var saram1 = new Saram("홍길동", "도둑");
+        var saram2 = new Saram("성춘향", "무직");
+        var saram3 = new Saram("이몽룡", "암행어사");
+
+        //console.log(saram1.name, saram1.job);
+        //console.log(saram2['name'], saram2['job']);
+
+        var table = document.querySelector("#saramTable");
+        var saram1 = new Saram("이순신", "장군");
+        table.innerHTML = ` <tr>${saram1.mkRow()}</tr>`;
+
+    </script>
+</body>
+</html>

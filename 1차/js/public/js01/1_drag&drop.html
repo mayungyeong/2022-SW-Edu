@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            border: 0px solid white;
+            background-color: rgb(158, 203, 255);
+            width: 200px;
+            height: 300px;
+            position: absolute;
+            left: 40px;
+            top: 80px;
+            font-weight: bold;
+        }
+
+        .box2 {
+            border: 0px solid white;
+            background-color: rgb(158, 203, 255);
+            width: 200px;
+            height: 300px;
+            position: absolute;
+            left: 300px;
+            top: 80px;
+            font-weight: bold;
+        }
+
+        .Drag_items {
+            margin-top: 400px;
+            margin-left: 40px;
+        }
+
+        .Drag_items .item1 {
+            border: 1px solid red;
+            background-color: red;
+            width: 100px;
+            text-align: center;
+            position: absolute;
+            left: 40px;
+            right: 0;
+            top: 400px;
+        }
+
+        .Drag_items .item2 {
+            border: 1px solid orange;
+            background-color: orange;
+            width: 100px;
+            text-align: center;
+            position: absolute;
+            left: 40px;
+            right: 0;
+            top: 430px;
+        }
+
+        .Drag_items .item3 {
+            border: 1px solid yellow;
+            background-color: yellow;
+            width: 100px;
+            text-align: center;
+            position: absolute;
+            left: 40px;
+            right: 0;
+            top: 460px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>드래그 앤 드롭 기능 구현 (1) </h1>
+    <div class="Drag_target">
+        <div class="box">Drag Target 1</div>
+        <div class="box2">Drag Target 2</div>
+    </div>
+
+    <div class="Drag_items">
+        <div class="item1">Drag Item 1</div>
+        <div class="item2">Drag Item 2</div>
+        <div class="item3">Drag Item 3</div>
+    </div>
+
+    <script>
+        var item1 = document.querySelector('.Drag_items .item1');
+        var item2 = document.querySelector('.Drag_items .item2');
+        var item3 = document.querySelector('.Drag_items .item3');
+
+        item1.addEventListener('mousedown', function (e) {
+            item1.gapX = e.clientX - item1.offsetLeft;
+            item1.gapY = e.clientY - item1.offsetTop;
+
+            function moveHandler(e2) {
+                item1.style.left = e2.clientX - item1.gapX + "px";
+                item1.style.top = e2.clientY - item1.gapY + "px";
+            }
+
+            window.addEventListener('mousemove', moveHandler);
+            item1.addEventListener('mouseup', function () {
+                window.removeEventListener('mousemove', moveHandler);
+            });
+
+        });
+
+        item2.addEventListener('mousedown', function (e) {
+            item2.gapX = e.clientX - item2.offsetLeft;
+            item2.gapY = e.clientY - item2.offsetTop;
+
+            function moveHandler(e2) {
+                item2.style.left = e2.clientX - item2.gapX + "px";
+                item2.style.top = e2.clientY - item2.gapY + "px";
+            }
+
+            window.addEventListener('mousemove', moveHandler);
+            item2.addEventListener('mouseup', function () {
+                window.removeEventListener('mousemove', moveHandler);
+            });
+
+        });
+
+        item3.addEventListener('mousedown', function (e) {
+            item3.gapX = e.clientX - item3.offsetLeft;
+            item3.gapY = e.clientY - item3.offsetTop;
+
+            function moveHandler(e2) {
+                item3.style.left = e2.clientX - item3.gapX + "px";
+                item3.style.top = e2.clientY - item3.gapY + "px";
+            }
+
+            window.addEventListener('mousemove', moveHandler);
+            item3.addEventListener('mouseup', function () {
+                window.removeEventListener('mousemove', moveHandler);
+            });
+
+        });
+    </script>
+</body>
+
+</html>

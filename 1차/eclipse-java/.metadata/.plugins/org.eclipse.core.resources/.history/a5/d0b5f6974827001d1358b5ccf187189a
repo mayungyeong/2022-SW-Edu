@@ -1,0 +1,41 @@
+package com.example.demo.home;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HomeController {
+	
+	@GetMapping("/")
+	public String home() {
+		return "Hello world";
+	}
+	
+	@GetMapping("/profile")
+	public String profile() {
+		return "{\"page\" : \"profile\", \"message\" : \"Hello World\"}";
+	}
+	
+	@GetMapping("/ex/json01")
+	public String JsonEx() {
+		JSONObject jsonobj = new JSONObject();
+		jsonobj.put("page", "My Page");
+		jsonobj.put("message", "Ok JSON");
+		
+		System.out.println(jsonobj.toString(2));
+		
+		return jsonobj.toString(2);
+	}
+
+	@GetMapping("/ex/json02")
+	public String JsonListEx() {		
+		JSONArray jsonArr = new JSONArray();
+		JSONObject json = null;
+		
+		json = new JSONObject();
+		jsonArr.put(json);
+		
+		return "get - jsonListEx";
+	}
+}

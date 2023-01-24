@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div.box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            background-color: yellow;
+            position: relative;
+            transition: left 0.1s linear;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">Box</div>
+
+    <script>
+
+        function moveBox(selector, callback) {
+            var box = document.querySelector(selector);
+            var x = box.offsetLeft;
+            var step = 50;
+            var inter = setInterval(function () {
+                x += step;
+                if (x > 500) {
+                    clearInterval(inter);
+                    callback(box);
+                }
+                box.style.left = x + "px"; 
+            }, 100);
+        }
+
+        moveBox("div.box", function(target){ //target이 박스가 됨
+            target.style.backgroundColor = "red";
+            target.innerHTML = "완료";
+        });
+
+    </script>
+</body>
+
+</html>

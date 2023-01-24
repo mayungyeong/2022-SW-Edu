@@ -1,0 +1,632 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome</title>
+  <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
+  <script src="./bootstrap/jquery.slim.min.js"></script>
+  <script src="./bootstrap/popper.min.js"></script>
+  <script src="./bootstrap/bootstrap.bundle.min.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+  <script defer src="/__/firebase/8.9.1/firebase-app.js"></script>
+  <script defer src="/__/firebase/8.9.1/firebase-auth.js"></script>
+  <script defer src="/__/firebase/8.9.1/firebase-firestore.js"></script>
+  <script defer src="/__/firebase/8.9.1/firebase-storage.js"></script>
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+  <style media="screen">
+    body {
+      background: #ECEFF1;
+      color: rgba(0, 0, 0, 0.87);
+      font-family: Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    #message {
+      background: white;
+      max-width: 800px;
+      margin: 50px auto 16px;
+      padding: 32px 24px;
+      border-radius: 3px;
+    }
+
+    #message h2 {
+      color: #ffa100;
+      font-weight: bold;
+      font-size: 16px;
+      margin: 0 0 8px;
+    }
+
+    #message h1 {
+      font-size: 22px;
+      font-weight: 300;
+      color: rgba(0, 0, 0, 0.6);
+      margin: 0 0 16px;
+    }
+
+    #message p {
+      line-height: 140%;
+      margin: 16px 0 24px;
+      font-size: 14px;
+    }
+
+    #message a {
+      display: block;
+      text-align: center;
+      background: #039be5;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: white;
+      padding: 16px;
+      border-radius: 4px;
+    }
+
+    #message,
+    #message a {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+
+    #load {
+      color: rgba(0, 0, 0, 0.4);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    label {
+      display: inline-block;
+      width: 120px;
+    }
+
+    div.leftSide,
+    div.rightSide {
+      float: left;
+    }
+
+    div.inputPage {
+      width: 800px;
+    }
+
+    div.saveBtnGroup {
+      clear: both;
+    }
+
+    div.list-head-area {
+      width: 800px;
+    }
+
+    div.list-head-area>div {
+      float: left;
+      width: 100px;
+      text-align: center;
+    }
+
+    div.list-head-area {
+      margin-bottom: 8px;
+      border-bottom: 1px solid #aaa;
+      overflow: hidden;
+    }
+
+    div.list-head-area>div:nth-child(1) {
+      width: 50px;
+    }
+
+    div.list-head-area>div:nth-child(4) {
+      width: 200px;
+    }
+
+    div.list-head-area>div:nth-child(5) {
+      width: 200px;
+    }
+
+    div.list-head-area>div:nth-child(6) {
+      width: 80px;
+    }
+
+    #list {
+      clear: both;
+    }
+
+    div.item-row {
+      border-bottom: 1px solid #aaa;
+      overflow: hidden;
+    }
+
+    div.item-row>div>div {
+      text-align: center;
+      float: left;
+    }
+
+    div.item-row>div.item-photo>div:nth-child(1) {
+      width: 50px;
+    }
+
+    div.item-row>div.item-photo>div:nth-child(2) {
+      width: 100px;
+    }
+
+    div.item-row>div.item-info>div {
+      width: 100px;
+    }
+
+    div.item-row>div.item-info>div:nth-child(2),
+    div.item-row>div.item-info>div:nth-child(3) {
+      width: 200px;
+    }
+
+    div.item-row>div.item-info>div:nth-child(4) {
+      width: 80px;
+    }
+
+    div.item-row {
+      clear: both;
+    }
+
+    @media (max-width: 600px) {
+
+      body,
+      #message {
+        margin-top: 0;
+        background: white;
+        box-shadow: none;
+      }
+
+      body {
+        border-top: 16px solid #ffa100;
+      }
+
+      .rightSide img {
+        width: 350px;
+      }
+
+      .leftSide input[type=text] {
+        width: 200px;
+      }
+
+      div.leftSide,
+      div.rightSide {
+        clear: both;
+      }
+
+      label {
+        width: 110px;
+      }
+
+      div.list-head-area {
+        display: none;
+      }
+
+      #list div.no {
+        display: none;
+      }
+
+      #list>div.item-row {
+        width: 400px;
+        clear: both;
+        margin-top: 10px;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 10px;
+      }
+
+      #list div br {
+        display: none;
+      }
+
+      #list img {
+        width: 120px;
+        margin-right: 5px;
+      }
+
+      div.item-row>div.item-photo>div:nth-child(2) {
+        width: 130px;
+      }
+
+      div.item-row {
+        overflow: hidden;
+      }
+
+      #load,
+      div.item-row>div>div {
+        text-align: left;
+        clear: both;
+      }
+
+      #list>div.item-row>div {
+        float: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="message" class="container">
+    <h2>움파룸파</h2>
+    <h1>Firebase 활용한 SPA CRUD</h1>
+    <hr>
+    <div class="inputPage">
+      <div class="leftSide">
+        <div>
+          <label>ObjectID</label>
+          <span id="object_id_show"></span>
+          <input type="hidden" id="object_id" value="">
+        </div>
+        <div>
+          <label>ID</label>
+          <input type="text" id="user_id" value="">
+        </div>
+        <div>
+          <label>NAME</label>
+          <input type="text" id="user_name" value="">
+        </div>
+        <div>
+          <label>EMAIL</label>
+          <input type="text" id="email" value="">
+        </div>
+        <div>
+          <label>PHOTO</label>
+          <input type="file" id="photo">
+        </div>
+      </div>
+      <div class="rightSide">
+        <div><img id="imgView" src="images/noimage.gif" width="300"></div>
+        <div>more information: </div>
+      </div>
+      <div class="saveBtnGroup">
+        <label colspan="2">PASSWORD:</label><input type="text" id="passwd" value="" size="4" />
+        <button id="saveBtn">SAVE</button>
+        <button id="updateBtn">UPDATE</button>
+      </div>
+    </div>
+    <hr>
+    <div class="list-head-area"></div>
+    <div id="list"></div>
+  </div>
+  <p id="load">Firebase SDK Loading&hellip;</p>
+
+  <script>
+    var db = null;
+    var storage = null;
+
+    function clearInputArea() {
+      $('#user_id').val("");
+      $('#user_name').val("");
+      $('#email').val("");
+      $('#photo').val("");
+      $('#passwd').val("");
+      $('#imgView').attr('src', 'images/noimage.gif');
+    }
+
+    function clearTempDir() {
+      var storageRef = storage.ref();
+      var listRef = storageRef.child('temp');
+      listRef.listAll().then(function (res) {
+        res.prefixes.forEach(function (folderRef) {
+        });
+        res.items.forEach(function (itemRef) {
+          //console.log(">>> delete : ", itemRef.fullPath);
+          storageRef.child(itemRef.fullPath).delete().then(() => {
+            //console.log("임시 저장 파일 삭제 완료!");
+            clearInputArea();
+          });
+        });
+      }).catch(function (error) { });
+    }
+
+    function saveDataWithFile(saveData, mode, saveFile, orginFileName, storageRef, objID) {
+      // 파일이름이 같은 파일이 업로드 되면 기존 파일이 사라진다.
+      // 업로드 되는 파일명이 중복 되지 않도록 새 파일명을 만든다.
+      // 가장 쉬운 방법은 timestamp를 파일명으로 이용한다.
+      // 확장자가 있다면 확장자를 분리해서 timestamp와 결합하기
+      // abcd.jpg  --> timestamp.jpg
+      // 확장자가 없다면 그냥 timestamp 사용.
+      // timestamp
+      var timestamp = new Date().getTime();
+      var fileName = timestamp;
+      if (orginFileName.lastIndexOf(".") != -1) {
+        fileName += orginFileName.substr(orginFileName.lastIndexOf("."));
+      }
+      var uploadTask = storageRef.child('images/' + fileName).put(saveFile).then((snapshot) => {
+        // 서버에 저장된 경로 알아내기
+        snapshot.ref.getDownloadURL().then((downloadURL) => {
+          // 입력된 정보와 함께 Firestore db에 저장하기
+          saveData.user_id = $('#user_id').val();
+          saveData.user_name = $('#user_name').val();
+          saveData.email = $('#email').val();
+          saveData.image = fileName;
+          saveData.orginFileName = orginFileName;
+          saveData.fileURL = downloadURL;
+          saveData.update_date = new Date();
+          saveData.passwd = $('#passwd').val();
+          if (mode == 'add') {
+            //console.log(">>> 새 데이터 저장");
+            db.collection('saram').add(saveData).then((docRef) => {
+              showList();
+              clearTempDir();
+            }).catch((err) => {
+              console.log('DB에 데이터 저장 오류!', err);
+            });
+          } else {
+            //console.log(">>> 기존 데이터 수정");
+            db.collection('saram').doc(objID).set(saveData).then((docRef) => {
+              showList();
+              clearTempDir();
+            }).catch((err) => {
+              console.log('DB에 데이터 저장 오류!', err);
+            });
+          }
+        });
+
+      }).catch((err) => {
+        console.log('파일 업로드 오류!', err);
+      });
+    }
+
+    function updateDataWithoutFile(saveData, mode, objID) {
+      saveData.user_id = $('#user_id').val();
+      saveData.user_name = $('#user_name').val();
+      saveData.email = $('#email').val();
+      saveData.update_date = new Date();
+      saveData.passwd = $('#passwd').val();
+      if (mode == 'add') {
+        db.collection('saram').add(saveData).then((docRef) => {
+          showList();
+          clearInputArea();
+        }).catch((err) => {
+          console.log('DB에 데이터 저장 오류!', err);
+        });
+      } else {
+        db.collection('saram').doc(objID).set(saveData).then((docRef) => {
+          showList();
+          clearInputArea();
+        }).catch((err) => {
+          console.log('DB에 데이터 수정 오류!', err);
+        });
+      }
+    }
+
+    function updateItem() {
+      $('#updateBtn').off().on('click', function () {
+        var objectID = $('#object_id').val();
+        var mode = "set";
+        var confirmPasswd = $('#passwd').val();
+        // 만약 새 파일이 있다면 기존 파일은 지우고 새 파일로 교체 한다.
+        if (objectID) {
+          db.collection('saram').doc(objectID).get().then((docRef) => {
+            var doc = docRef.data();
+            var passwd = doc.passwd == undefined ? "" : doc.passwd;
+            if (passwd !== confirmPasswd) {
+              alert("비밀 번호가 일치 하지 않습니다!");
+              $(this).parent().find('input.passwd').focus();
+              return;
+            }
+            try {
+              var saveFile = $('#photo')[0].files[0];
+              var orginFileName = saveFile.name;
+              var storageRef = storage.ref();
+              //console.log(">>>> 파일 있다 : ", objectID);
+              storageRef.child('images/' + doc.image).delete().then(() => {
+                //console.log("기존 파일 삭제 완료!");
+                saveDataWithFile(doc, mode, saveFile, orginFileName, storageRef, objectID);
+              });
+            } catch (e) {
+              //console.log('>>>> 파일이 없다 : ');
+              updateDataWithoutFile(doc, mode, objectID);
+            }
+          });
+        } else {
+          alert("Object ID가 존재 하지 않음. 먼저 수정 할 항목을 선택 하세요.");
+        }
+      });
+    }
+
+    function changePhoto() {
+      $('#photo').on('change', function (evt) {
+        //1. 파일이 선택되면
+        //2. 일단 서버에 임시로 올린다.
+        //3. 서버의 downloadURL을 이용해서 보여준다.
+        try {
+          var storageRef = storage.ref();
+          var tmpImg = $(this)[0].files[0];
+          var tmpImgName = $(this)[0].files[0].name;
+          storageRef.child('temp/' + tmpImgName).put(tmpImg).then((snapshot) => {
+            snapshot.ref.getDownloadURL().then((downloadURL) => {
+              $('#imgView').attr('src', downloadURL);
+            });
+          }).catch(function (e) {
+            console.log('파일 이미지 임시저장 에러!', e);
+          });
+        } catch (e) {
+          console.log("선택된 이미지가 없습니다.");
+        }
+      });
+    }
+
+    function detailView() {
+      $(".detail").on('click', function () {
+        var objId = $(this).attr('data-doc-id');
+        db.collection('saram').doc(objId).get().then((sm) => {
+          var item = sm.data();
+          var image = item.image;
+          $('#object_id_show').text(sm.id);
+          $('#object_id').val(sm.id);
+          $('#user_id').val(item.user_id);
+          $('#user_name').val(item.user_name);
+          $('#email').val(item.email);
+          $('#photo').val("");
+          $('#imgView').attr('src', item.fileURL);
+          $('#imgView').attr('title', item.orginFileName);
+          $('#imgView').attr('alt', item.image);
+          $('#passwd').val("");
+        });
+      });
+    }
+
+    function saveItem() {
+      // saveBtn 누르면 저장 된 데이터 가져오기
+      $('#saveBtn').on('click', (evt) => {
+        if ($('#user_id').val() == "") {
+          alert("아이디를 입력 하세요!");
+          $('#user_id').focus();
+          return;
+        }
+        if ($('#user_name').val() == "") {
+          alert("성명을 입력 하세요!");
+          $('#user_id').focus();
+          return;
+        }
+        if ($('#email').val() == "") {
+          alert("이메일을 입력 하세요!");
+          $('#email').focus();
+          return;
+        }
+        if ($('#save').val() == "") {
+          alert("비밀번호를 입력 하세요!");
+          $('#passwd').focus();
+          return;
+        }
+        //1. 이미지 저장
+        //2. 저장된 이미지 경로를 데이터에 저장
+        try {
+          var saveFile = $('#photo')[0].files[0];
+          var orginFileName = saveFile.name;
+          var storageRef = storage.ref();
+          saveDataWithFile({}, 'add', saveFile, orginFileName, storageRef);
+        } catch (e) {
+          alert('이미지 파일을 선택하세요!');
+        }
+      });
+    }
+
+    function deleteItem() {
+      $('button.delBtn').on('click', function (evt) {
+        var imgURL = $(this).attr('data-img-url');
+        var docID = $(this).attr('data-doc-id')
+        var confirmPasswd = $(this).parent().find('input.passwd').val();
+        var THIS = this;
+        // 생성된 순서의 역순으로 삭제한다 (doc삭제 -> file삭제)
+        db.collection('saram').doc(docID).get().then((docRef) => {
+          var passwd = docRef.data().passwd == undefined ? "" : docRef.data().passwd;
+          if (passwd !== confirmPasswd) {
+            alert("비밀 번호가 일치 하지 않습니다!");
+            $(this).parent().find('input.passwd').focus();
+            return;
+          }
+          db.collection('saram').doc(docID).delete().then(() => {
+            var storageRef = storage.ref();
+            var delImgRef = storageRef.child('images/' + $(THIS).attr('data-img'));
+            delImgRef.delete().then(() => {
+              // 삭제 완료 후 목록 갱신
+              showList();
+              // 입력 창 초기화
+              clearInputArea();
+              alert("항목 삭제 완료!");
+            }).catch((deleteFileErr) => {
+              console.log('삭제 실패!', deleteFileErr);
+            });
+          }); // end of delete
+        });
+      });
+    }
+
+    function showList() {
+      db.collection('saram').get().then((nm, i) => {
+        $('.list-head-area').html(`
+          <div class="no-head">NO</div>
+          <div class="photo-head">PHOTO</div>
+          <div class="id-head">ID</div>
+          <div class="name-head">NAME</div>
+          <div class="email-head">EMAIL</div>
+          <div class="delete-head">DELETE</div>
+        `);
+        $('#list').html("");
+        nm.docs.forEach((doc, no) => {
+          var saram = {
+            docId: doc.id,
+            no: no,
+            image: doc.data().image,
+            id: doc.data().user_id,
+            name: doc.data().user_name,
+            email: doc.data().email,
+            fileURL: doc.data().fileURL,
+            updateDate: doc.data().update_date,
+          };
+          $('#list').append(`
+            <div class="item-row">
+              <div class="item-photo">
+                <div class="no">${saram.no}</div>
+                <div class="photo"><img data-doc-id="${saram.docId}" data-img="${saram.image}" class="detail" src="${saram.fileURL}" width="100" title="${saram.orginFileName}"></div>
+              </div>
+              <div class="item-info">
+                <div>${saram.id}</div>
+                <div>${saram.name}</div>
+                <div>${saram.email}</div>
+                <div style="text-align:center">
+                  <input class="passwd" type="text" size="4" placeholder="비밀번호"><br/>
+                  <button data-img="${saram.image}" data-img-url="${saram.fileURL}" data-doc-id="${saram.docId}" class="delBtn">DELETE</button>
+                </div>
+              </div>
+            </div>
+            `);
+        }); // end of forEach ...
+
+        // 삭제 버튼 기능 호출 ...
+        deleteItem();
+        // 상세보기 기능
+        detailView();
+        // 수정 기능
+        updateItem();
+
+
+        console.log($('div.item-row>div.item-photo')[0].clientHeight)
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const loadEl = document.querySelector('#load');
+      db = firebase.firestore();
+      storage = firebase.storage();
+
+      showList();
+      // 정보 저장 기능
+      saveItem();
+      // 사진 파일 추가
+      changePhoto();
+
+      try {
+        let app = firebase.app();
+        let features = [
+          'auth',
+          'firestore',
+          'storage',
+        ].filter(feature => typeof app[feature] === 'function');
+        loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+      } catch (e) {
+        console.error(e);
+        loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+      }
+    });
+  </script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+  <script>
+      var firebaseConfig = {
+      apiKey: "AIzaSyAv05jgyJYXoIlrPxbv-tDaH2QJI7xYNrE",
+      authDomain: "study-21.firebaseapp.com",
+      projectId: "study-21",
+      storageBucket: "study-21.appspot.com",
+      messagingSenderId: "1092886198809",
+      appId: "1:1092886198809:web:abe55a8885a177ce4d0888"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+</body>
+
+</html>

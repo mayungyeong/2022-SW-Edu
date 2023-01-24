@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style> /* inline > internal > external */
+        h1 {
+            color: yellow;
+            background-color: black; /* 블록 태그, 100% */
+        }
+        ul {
+            overflow: hidden; /* 2. 높이가 없으면 내용물 크기에 자동 맞춤 */
+            list-style: none; /* ul 표시 없애기 */
+            padding: 0;
+            width: 500px; /* 102(border 1+1) x 5 */
+        }
+        span {
+            border : 1px solid blue; /* 인라인 태그, 해당 크기만큼 */
+        }
+        li {
+            /* border: 0px solid orange; */
+            border-top : 1px solid red;
+            border-bottom : 1px solid red;
+            width: 100px;
+
+            /* 공중에 띄워서 왼쪽 정렬 */
+            /* display: inline-block; - 모든 브라우저X, 고사양 가능 */
+            float : left; 
+            /* ul 부분 한 줄로 겹쳐서 찌그러짐 
+            -> 1. ul 높이 설정(height, 더러움) 2. li 높이에 자동 맞춤 */
+
+            height: 40px;
+            text-align: center; /* 상하 가운데 안됨 */
+            line-height: 40px; /* height와 높이 같게 해주기 */
+            box-sizing: border-box; /* 바깥이 아니라 안쪽으로 늘어남 */
+            background-color: white;
+        }
+
+        li:hover { /* 가상 선택자, 마우스 올라갔을 때 */
+            background-color: yellowgreen;
+            border-bottom : 2px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>범준쌤 코딩교실</h1>
+    <span>hello</span><span>world</span>
+    <nav>
+        <ul>
+            <li>HOME</li>
+            <li>PROFILE</li>
+            <li>LETURE</li>
+            <li>GALLERY</li>
+            <li>SHOP</li>
+        </ul>
+    </nav>
+</body>
+
+</html>

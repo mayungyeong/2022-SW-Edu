@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 700px;
+        }
+        #employee_add {
+            background-color: rgb(210, 66, 66);
+            color: white;
+            border-radius: 3px;
+            border: 0px;
+            height: 30px;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        td {
+            vertical-align: top;
+        }
+
+        img {
+            height: 150px;
+            width: 250px;
+        }
+
+        #table2 {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        #table2 th {
+            border: 1px solid black;
+        }
+
+        #table2 td {
+            border: 1px solid black;
+            height: 40px;
+        }
+
+        #table3 {
+            margin: 10px;
+            border: 0px solid rgb(185, 185, 185);
+            border-collapse: collapse;
+        }
+
+        #table3 th{
+            border: 0px;
+            border-top: 1px solid rgb(185, 185, 185);
+            border-collapse: collapse;
+        }
+
+        #table3 td{
+            border: 0px;
+            border-top: 1px solid rgb(185, 185, 185);
+            border-collapse: collapse;
+        }
+
+    </style>
+</head>
+
+<body>
+    <form action="https://naver.com" method="get">
+        <table>
+            <tr>
+                <th><label for="name">이름</label></th>
+                <td><input type="text" id="name" name="name" value="" required></td>
+            </tr>
+            <tr>
+                <th><label for="depart">부서</label></th>
+                <td><input type="text" id="depart" name="depart" value="" required></td>
+            </tr>
+            <tr>
+                <th><label for="position">직책</label></th>
+                <td><input type="text" id="position" name="position" value="" required></td>
+            </tr>
+            <tr>
+                <th><label for="photo">사진</label></th>
+                <td><input type="button" id="photo" name="photo" value="파일 선택" required> 선택된 파일 없음</td>
+            </tr>
+            <tr>
+                <th>
+                    <br>
+                    <input type="submit" id="employee_add" value="새 사원 추가">
+                </th>
+            </tr>
+        </table>
+    </form>
+
+    <hr />
+    <input type="button" id="choose_del" value="선택 삭제"> | 검색:
+    <select name="search">
+        <option value="이름">이름</option>
+        <option value="부서">부서</option>
+        <option value="직책">직책</option>
+    </select>
+    <input type="text" id="" name="" value="">
+
+    <table id="table2">
+        <tr style="background-color: orange;">
+            <th><input type="checkbox" name="" value=""></th>
+            <th>번호</th>
+            <th colspan="2">사진</th>
+            <th>사원명</th>
+            <th>부서</th>
+            <th>직급</th>
+            <th>수정</th>
+            <th>삭제</th>
+        </tr>
+        <tr>
+            <td rowspan="5"><input type="checkbox" name="" value=""></td>
+            <td rowspan="5">1043</td>
+            <td colspan="2"><img src="sky.jpg"></td>
+            <td>홍길동</td>
+            <td>개발</td>
+            <td>대리</td>
+            <td rowspan="5"><input type="button" id="edit" value="edit"></td>
+            <td rowspan="5"><input type="button" id="delete" value="delete"></td>
+        </tr>
+
+        <tr>
+            <td colspan="5">
+                <table id="table3">
+                    <tr>
+                        <th>번호</th>
+                        <th style="width: 26%;">댓글 내용</th>
+                        <th>작성자</th>
+                        <th>수정</th>
+                        <th>삭제</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>멋진 사진입니다</td>
+                        <td>박문수</td>
+                        <td>수정</td>
+                        <td>삭제</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>좋아요^^ 퍼가요~</td>
+                        <td>일지매</td>
+                        <td>수정</td>
+                        <td>삭제</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="5">
+                댓글<input type="text" id="comment" name="comment" value="">
+                작성자<input type="text" id="writer" name="writer" value="">
+                <input type="submit" id="comment_write" value="댓글입력">
+            </td>
+        </tr>
+    </table>
+    <br>
+    (c)comstudy21.or.kr
+</body>
+
+</html>

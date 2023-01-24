@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div#puzzle {
+            border: 3px solid rgb(39, 207, 117);
+            width: 400px;
+            height: 400px;
+            padding: 0;
+        }
+
+        #puzzle div.cell {
+            width: 100px;
+            height: 100px;
+            border: 1px solid rgb(108, 220, 108);
+            box-sizing: border-box;
+            float: left;
+            margin: 0;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+    <script>
+        class PuzzleGame {
+
+            constructor() {
+                this.puzzle = null;
+                this.cells = [];
+                this.init();
+
+                this.firstCell = null;
+                this.count = 0;
+            }
+
+            init() {
+                console.dir(this);
+                this.body = document.body;
+                this.body.innerHTML = `<h1>Puzzle</h1><hr />`;
+                this.puzzle = document.createElement("div");
+                this.puzzle.id = "puzzle";
+                this.body.appendChild(this.puzzle);
+
+                for (var i = 0; i < 16; i++) {
+                    var cell = document.createElement("div");
+                    cell.className = "cell";
+                    cell.innerText = i;
+                    this.puzzle.appendChild(cell);
+                    this.cells.push(cell);
+                }
+                this.cells.forEach(function (item, i) {
+                    let charCode = i % 8 + 65;
+                    item.innerHTML = String.fromCharCode(charCode);
+                });
+            }
+
+            swap(i, j) {
+                let tmpTxt = this.cells[i].innerText;
+                this.cells[i].innerText = this.cells[j].innerText;
+                this.cells[j].innerText = tmpTxt;
+            }
+
+            compare(cell) {
+                if (this.firstCell == null) {
+                    this.firstCell = cell;
+                    this.firstCell.innerHTML = cell.ch;
+                } else {
+                    if (this.firstCell.ch == cell.ch) { //같을 때
+                        cell.innerHTML = cell.ch;
+                        this.count++;
+                        this.firstCell = null;
+                    } else { //다를 때
+                        cell.innerHTML = cell.ch;
+                        setTimeout(() => {
+                            cell.innerHTML = "";
+                            this.firstCell.innerHTML = "";
+                            this.firstCell = null;
+                        }, 800);
+                    }
+                }
+            }
+
+            start() {
+
+                for (let i = 0; i < 50; i++) {
+                    let idx1 = Math.abs(Math.floor(Math.random() * 16));
+                    let idx2 = Math.abs(Math.floor(Math.random() * 16));
+                    this.swap(idx1, idx2);
+                }
+                setTimeout(() => {
+                    // 모든 요소 숨기기
+                    this.cells.forEach((item, i) => {
+                        item['ch'] = item.innerText;
+                        item.innerHTML = "";
+                        item.addEventListener('click', (e) => {
+                            this.compare(e.currentTarget);
+                        });
+                    });
+                }, 800);
+            }
+        }
+
+        function main() {
+            new PuzzleGame().start();
+        }
+        window.addEventListener("load", main);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

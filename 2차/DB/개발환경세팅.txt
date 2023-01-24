@@ -1,0 +1,184 @@
+<oracle 설치>
+https://www.oracle.com/database/technologies/xe-prior-release-downloads.html
+
+< java설치 - v11 >
+환경 변수 설정
+1) 시스템 변수 추가
+변수 이름 : JAVA_HOME
+변수 값 : C:\Program Files\Java\java-11
+2) path 선택 후 추가
+%JAVA_HOME%\bin
+
+< 톰캣 설치 >
+Web서버및엔진 = was
+https://tomcat.apache.org/download-90.cgi
+
+< 이클립스 설치 >
+https://www.eclipse.org/
+
+< 이클립스 세팅 >
+1) 톰캣 연결
+Window메뉴
+ ㄴPreferences
+   ㄴServer
+     ㄴRuntime Enviroments
+       ㄴAdd... 
+         ㄴApache - Apache Tomcat v9.0 선택
+           ㄴBrowse.. 
+             ㄴC:\workspace\apache-tomcat-9.0.65
+
+2) 프로젝트 생성
+File메뉴 New => Dynamic Web Project
+프로젝트 이름 설정
+       ㄴ톰캣연결9.0정보
+       ㄴ맨 마지막에서 WebContent 가상디렉터리 이름 기술
+
+3) 자바
+툴바 오른쪽에 Open Perspective
+     ㄴJava EE(default)선택하면 오른쪽 끝에 coffeeBean 아이콘
+
+4) Servers 폴더 자동생성
+Window메뉴 show View => Servers클릭
+하단에 Servers 탭
+ No servers are available Click...create a New Server 
+   ㄴApache 
+     ㄴApache Tomcat v9.0 Server 선택
+       ㄴWeb0812플젝 Add >> 오른쪽 이동
+
+
+5) ojdbc6.jar, cos.jar 파일
+Web0812
+ ㄴWebContent
+   ㄴMETA-INF
+   ㄴWEB-INF
+     ㄴlib폴더 
+        ㄴojdbc6.jar 파일
+        ㄴcos.jar 파일
+
+6) 폰트 설정
+Window메뉴
+ㄴPreferences클릭
+   ㄴGeneral
+      Appearance
+        Colors and Fonts
+        Basic - Text Font 선택 =>편집Edit..
+
+7) 한글 인코딩 UTF-8
+Window
+ㄴPreferences
+   ㄴWeb
+     HTML Files, JSP Files
+      UTF-8선택
+
+8) WebBrowser 설정
+Window
+Web Browser => 0 기본 이클립스, 5 크롬
+Show View => Project Explorer
+Show View => Console
+
+########################################################
+< DB 셋팅 >
+--port변경
+SQL> select dbms_xdb.getHttpPort() from dual ;
+SQL> exec dbms_xdb.setHttpPort(9000) ;
+SQL> commit ;
+
+<< miniBBS 디비 셋팅 >>
+[login 테이블]
+drop table login;
+ create table login( 
+   userid varchar2(10) primary key ,
+   pwd varchar2(10) not null 
+ );
+ insert into login values( 'sky' , '1234' );
+ insert into login values( 'blue' , '1234' );
+ insert into login values( 'pink' , '1234' );
+
+[bbs 테이블]
+drop  sequence  bbs_seq;  
+create sequence bbs_seq;
+
+drop  table bbs;  
+ create  table  bbs (
+  b_no number(7) not null,    
+  b_sabun  number(4) not null,  
+  b_name varchar2(15) not null,
+  b_title  varchar2(30) not null, 
+  b_cnt number(5) default 0 ,
+  b_content  varchar2(30) not null,
+  b_phone  varchar2(20) not null,
+  b_pwd  varchar2(10)  not null,
+  b_wdate  date   not null,
+  b_juso1  varchar2(70) not null, 
+  b_juso2  varchar2(50) not null, 
+  b_email varchar2(30) not null, 
+  b_url  varchar2(30)  null, 
+  b_file1  varchar2(30) null, 
+  b_size1  number(7) default 0 ,
+  primary key(b_sabun)  
+);
+
+[bbsreply 테이블]
+drop sequence  bbsreply_seq ;
+create sequence  bbsreply_seq  ; 
+
+drop table bbsreply;  
+  create table  bbsreply (      
+    br_num number(4) not null,     
+    br_writer varchar2(10) not null,
+    br_content varchar2(20)not null,
+    br_date  date   not null,
+    br_sabun number(4) not null       
+  );
+
+[bbs, bbsreply 제약조건]
+alter table  bbsreply  drop  constraint  bbs_sabun_fk; 
+alter table  bbsreply  add   constraint  bbs_sabun_fk 
+   foreign key(br_sabun) references  bbs(b_sabun) on delete cascade;
+
+
+<< Web0812 디비 셋팅 >>
+[guest 테이블] - 메모장
+col title for a12;
+col email for a12;
+col writer  for a12;
+col content for a12;
+col pay for 9999;
+col hit for 999;
+
+[guestreply 테이블]
+ create sequence guestreply_seq ;
+ create table  guestreply (    
+  num number(4) not null,     
+  writer varchar2(10) not null,
+  content varchar2(20)not null,  
+  sabun number(4) not null        --guest테이블의  code필드와 연결
+ );
+ commit ; 
+
+insert into guestreply values(guestreply_seq.nextval, 'aaa','bbb',4466 );
+insert into guestreply values(guestreply_seq.nextval, 'kim','kim',4466);
+insert into guestreply values(guestreply_seq.nextval, 'lee','lee',4466);
+insert into guestreply values(guestreply_seq.nextval, 'a','a',4422);
+insert into guestreply values(guestreply_seq.nextval, 'lb','lb',4422);
+commit;
+
+[guest, guestreply 제약조건]
+alter table guestreply add  constraint  guest_code_fk
+     foreign key(sabun)  references guest(sabun)  on delete cascade ;
+
+[board 테이블]
+  create table board ( 
+     bnum number(4) ,
+     code number(4) ,
+     constraint board_pk primary key(bnum, code) 
+  ) ;
+
+insert into board values( 1100, 75);
+insert into board values( 1100, 95);
+insert into board values( 2200, 75);
+insert into board values( 2200, 95);
+insert into board values( 3300, 95); 
+
+
+

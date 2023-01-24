@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #content {
+            height: 100px;
+        }
+
+        th {
+            vertical-align: bottom;
+        }
+
+        textarea {
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="">
+        <table>
+            <tr>
+                <th><label for="title">제목:</label></th>
+                <td><input type="text" id="title" name="title" value=""></td>
+            </tr>
+            <tr>
+                <th><label for="name">이름:</label></th>
+                <td><input type="text" id="name" name="name" value=""></td>
+            </tr>
+            <tr>
+                <th><label for="content">내용:</label></th>
+                <td><textarea id="content" name="content" value=""></textarea></td>
+            </tr>
+        </table>
+        <input type="button" id="save" value="저장">
+    </form>
+
+    <br>
+
+    <div>
+        <h3>입력하신 데이터는 다음과 같습니다.</h3>
+        제목: <span id="title_result"></span><br>
+        이름: <span id="name_result"></span><br>
+        내용: <span id="content_result"></span><br>
+    </div>
+
+    <script>
+        let save = document.getElementById("save");
+
+        let getAjaxWrite = function() {
+            let title = document.getElementById("title").value;
+            let name = document.getElementById("name").value;
+            let content = document.getElementById("content").value;
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if (this.status == 200 && this.readyState == 4) {
+                    document.getElementById("title_result").innerHTML = title;
+                    document.getElementById("name_result").innerHTML = name;
+                    document.getElementById("content_result").innerHTML = content;
+                }
+            }
+            let url = `http://localhost:3000/write?title=${title}&name=${name}&content=${content}`;
+            xhr.open("GET", url, true);
+            xhr.send();
+            return 0;
+        }
+        save.onclick = getAjaxWrite;
+    </script>
+</body>
+
+</html>

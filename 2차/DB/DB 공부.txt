@@ -1,0 +1,231 @@
+★ SQL문
+1. 데이타 정의어(DDL : Data Definition Language)
+    : create, alter, drop, rename, truncate 
+2. 데이타 조작어(DML : Data Manipulation Language)
+    : insert, update, delete, select   
+3. 트랜젝션제어
+    : commit, rollback, savepoint
+4. 데이타 제어어(DCL : Data Control Language)
+    : grant, revoke
+
+number : 숫자형
+int : 정수형
+char : 문자형(고정형)
+varchar/varchar2 : 문자형(가변형) - 4000byte까지
+clob : 문자형(4000byte이상일때)  - 최대 4GB
+blob : binary로저장(그림, 음악등) - 최대 4GB
+date : 날짜형
+timestamp : date형의 확장
+
+[Create/Read/Update/Delete형식]
+ ㄴ insert into 테이블명(필드명1,필드명2) values(데이터값, 데이터값 ) ;
+ ㄴ select 필드명1, 필드명2  from 테이블명 ;
+ ㄴ delete from 테이블명 ;
+ ㄴ update 테이블명 set 필드=변경값 ;
+
+★-----------------------------------------------------------------------------
+SQL> desc sosi ; --sosi 테이블 정보
+SQL> clear screen ;  --화면 정리
+SQL> show user ;  -user 확인
+
+[트랜잭션]
+SQL> commit ;   -- 완전히 DB에 저장하기
+SQL> rollback ;   --마지막  되돌리기(select쿼리문제외)
+상식
+- 서버에 데이터를 select쿼리문 추출한데이터를 
+ 본인컴퓨터에서 제어 데이터셋=레코드셋=dataset,recordset
+
+--E.F codd학자분 RDB설계 정의  문자/문자열은 무조건 ' '
+
+SQL> col name for a10 ;
+SQL> set pagesize 1200 ;
+SQL> set linesize 1200 ;
+
+SQL> select  sysdate from dual ;  -dual 가짜더미테이블 
+
+SQL> select rownum, ss.* from  sosi  ss ; -- *에 rownum 하나 추가 시 
+
+★-----------------------------------------------------------------------------
+[함수]
+
+- sum(),avg(),max(),min(),count() : 수학의 집계함수 
+
+- nvl() : 공백일시 대체 문자 지정 
+  SQL> nvl(comm, 0)
+
+- lower() : 소문자
+
+- upper() : 대문자
+
+- initcap() : 첫자만 대문자
+
+- concat() : 문자열 연결
+
+- length(), lengthb() : 문자열 길이 - 1byte반환, 3byte반환
+  lengthb(char)함수는 문자열의 길이를 byte단위로 구하는 함수
+
+- substr(), substrb() : 문자열 추출  한글일때 3byte취급
+
+- instr() : 문자열 시작 위치 
+  SQL> select instr('RedPlus', 'Plus') from dual;
+
+- lpad() : 왼쪽 자리 채우기 
+  SQL> select lpad( 'RedPlus', 10, '*' ) from dual;
+
+- rpad() : 오른쪽 자리 채우기
+  SQL> select rpad('RedPlus', 10, '@') from dual;
+
+- trim() : 양쪽 공백 문자만 제거
+  SQL> select trim('   from  RedPlus  ') from dual;   
+
+- abs() : 절대값
+ SQL> select abs(-234) from dual;  --실습
+
+- floor() : 소수자리 버리기
+  SQL> select floor(12.345) from dual;  --실습
+
+- trunc() : 소수점 특정 자리 자르기
+  SQL> select trunc(67.8549, 2) from dual;   --67.85
+
+- round() : 반올림
+ SQL> select round(67.8579, 2) from dual ;  -- 67.86
+
+- mod() : 나머지
+  SQL> select mod(5, 3) from dual;   
+
+- sysdate 정답/ sysdate( ) 괄호하면 에러  : 날짜
+
+  SQL> select to_char(sysdate, 'day') from dual;  --화요일
+
+  SQL> select to_char(sysdate, 'dy') from dual;  --월
+
+★-----------------------------------------------------------------------------
+[case]
+SQL> select name, grade ,
+     case 
+       when grade = 'A'  then  '최고'
+       when grade = 'B'  then  '합격'
+       when grade = 'C'  then  '보통'
+       when grade = 'D'  then  '좀노력'
+       when grade = 'F'  then  '재수강'
+      end 평가  
+   from sosi;
+
+- decode() : case문과 같은 기능
+SQL> select id, name, grade,
+     decode( grade , 'A', '10번', 'B', '20번', 'C', '30번', '기타') 번호
+     from sosi ;
+
+
+[order by]
+-- select 필드명,~~~ from T명  where조건~  order by id ; --asc생략가능
+-- select 필드명,~~~ from T명  where조건~  order by id desc ; 역순
+
+[글자 삽입]
+SQL> select name || '님 ' || ' 등급은 '   || grade  || ' 입니다' from sosi ;
+
+[금액 규칙]
+SQL> select grade , 
+     to_char(sum(salary), 'L99,999,999') as 급여합계
+     from sosi 
+     group by grade  
+     order by grade ;
+
+	GRAD 급여합계
+	---- ------------------------------------------
+	A             ￦1,176,000
+	B               ￦132,000
+	C               ￦212,400
+	D               ￦105,600
+	F               ￦567,600
+
+★----------------------------------------------------------------------------
+[시퀀스]
+create sequence  시퀀스이름 
+
+INCREMENT BY 1 
+: 시퀀스 실행 시 증가시킬 값
+START WITH 1 
+: 시퀀스 시작값(MINVALUE과 같거나 커야 함)
+MINVALUE 
+: 시퀀스 시작되는 최솟값
+MAXVALUE 
+: 시퀀스 끝나는 최댓값
+NOCYCLE | CYCLE 
+: NOCYCLE (반복안함), CYCLE(시퀀스의 최댓값에 도달 시 최솟값 1부터 다시 시작)
+NOCACHE | CACHE 
+: NOCACHE(사용안함), CACHE(캐시를 사용하여 미리 값을 할당해 놓아서 속도가 빠르며, 동시 사용자가 많을 경우 유리)
+NOORDER | ORDER 
+: NOORDER(사용안함), ORDER(요청 순서로 값을 생성하여 발생 순서를 보장하지만 조금의 시스템 부하가 있음)
+
+SQL> create sequence  m_seq  increment by 1 start with 1 nocycle nocache;
+
+[시퀀스순번발생]
+SQL> create sequence  test _seq ;  --시퀀스는 자동번호 1부터시작 1씩증가 
+SQL> select sequence_name from user_sequences;
+
+SQL> create table  test (
+        key number  primary key ,
+        name varchar2(10) not null  ,
+        pay number(3)  
+     ) ;
+
+SQL> insert into test values(test_seq.nextval, 'abc', 23);
+SQL> insert into test values(test_seq.nextval, 'xyz', 34);
+SQL> insert into test values(test_seq.nextval, 'blue',78);
+
+★----------------------------------------------------------------------------
+[제약 5종류]
+1) Not null :  컬럼에 null 값x
+2) unique : 컬럼값 유일
+3) primary key : 컬럼값 유일,  null 값x
+   primary key = not null + unique
+4) Foreign key : 다른테이블의 컬럼 참조하는 키(FK)       
+5) check : 컬럼조건에 참인 값만 허용함 
+   -- check 제약조건삭제 없으면 에러 발생
+   -- 제약조건에서 없는 입력을 방지 가능
+
+SQL> create table  temp(
+    empid  number(4) ,
+    empname  varchar2(10),
+    sal  number(7,2) ,
+    comm  number(5,2),
+    constraint  temp_chk_sal  check(sal>comm)  
+);   -- 보너스가 더 크면 check 제약  
+
+★----------------------------------------------------------------------------
+[Table 구조 변경]
+1) 새로운컬럼 추가       
+    alter   table  테이블명 add ( 필드명   타입) ;
+2) 기존컬럼의 타입변경    
+    alter   table  테이블명 Modify(필드  타입) ;
+3) 기존컬럼필드명 변경    
+    alter   table  테이블명  rename  column 구필드명 to  신새로운필드명
+4) 컬럼 삭제            
+    alter   table  테이블명 drop column  필드이름;
+5) 테이블 삭제          
+    drop   table   테이블명;  
+
+SQL> alter table tblMember add phone varchar(10);
+SQL> alter table tblMember modify (phone varchar2(20));
+SQL> alter table tblMember rename column phone to mobilephone;
+SQL> alter table tblMember drop column  mobilephone;
+
+★----------------------------------------------------------------------------
+[Port 변경] 
+웹서버포트 8080/ 오라클포트를 9000변경하면 좋아요
+
+SQL>  select dbms_xdb.getHttpPort() from dual;  --포트확인
+SQL>  exec dbms_xdb.setHttpPort(9000);  -- 8080에서 9000으로 변경   
+SQL>  commit ;
+SQL>  select dbms_xdb.getHttpPort() from dual;   --포트확인
+
+SQL> spool off
+SQL> exit
+
+ @=start ~~~.sql문서 실행하는 명령어
+
+★----------------------------------------------------------------------------
+데이터베이스 백서버 - 오라클
+웹관련 서버 - 톰캣
+nodejs기반 서버 - express

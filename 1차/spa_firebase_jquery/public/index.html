@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사원 페이지</title>
+  <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
+  <script src="./bootstrap/jquery.slim.min.js"></script>
+  <script src="./bootstrap/popper.min.js"></script>
+  <script src="./bootstrap/bootstrap.bundle.min.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+  <script defer src="/__/firebase/8.9.1/firebase-app.js"></script>
+  <script defer src="/__/firebase/8.9.1/firebase-auth.js"></script>
+  <script defer src="/__/firebase/8.9.1/firebase-firestore.js"></script>
+  <script defer src="/__/firebase/8.9.1/firebase-storage.js"></script>
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  <style>
+    * {
+      margin: 5px;
+    }
+
+    body {
+      width: 700px;
+    }
+
+    #employee_add {
+      background-color: rgb(210, 66, 66);
+      color: white;
+      border-radius: 3px;
+      border: 0px;
+      height: 30px;
+    }
+
+    th {
+      text-align: left;
+    }
+
+    td {
+      vertical-align: top;
+    }
+
+    img {
+      height: 150px;
+      width: 250px;
+    }
+
+    #choose_del {
+      background-color: rgb(174, 212, 236);
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 사원 추가 폼 -->
+  <div class="container" id="empForm">
+    <table>
+      <h1>Ajax 연습</h1>
+      <br>
+      <tr>
+        <th><label for="name">이름</label></th>
+        <td><input type="text" id="name" name="name" value="" required></td>
+      </tr>
+      <tr>
+        <th><label for="depart">부서</label></th>
+        <td><input type="text" id="depart" name="depart" value="" required></td>
+      </tr>
+      <tr>
+        <th><label for="position">직책</label></th>
+        <td><input type="text" id="position" name="position" value="" required></td>
+      </tr>
+      <tr>
+        <th><label for="photo">사진</label></th>
+        <td><input type="file" id="photo" name="photo" value="파일 선택" multiple /></td>
+      </tr>
+      <tr>
+        <th>
+          <br>
+          <input type="submit" id="employee_add" value="새 사원 추가">
+        </th>
+      </tr>
+    </table>
+  </div>
+
+  <hr />
+
+  <!-- 목록 영역 -->
+  <div id="listBox">
+    <table class="table table-bordered" id="empListTbl">
+      <!-- 목록 헤드 -->
+      <thead style="background-color: orange;">
+        <th>번호</th>
+        <th>이름</th>
+        <th>부서</th>
+        <th>직책</th>
+        <th>사진</th>
+        <th>수정</th>
+        <th>삭제</th>
+      </thead>
+      <tbody class="list-head-area">
+        <!-- 목록 리스트 내용 -->
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+  (c)comstudy21.or.kr
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+      try {
+        const app = firebase.app();
+        const db = firebase.firestore();
+        const storage = firebase.storage();
+
+        var empList = [];
+
+        function mkTable() {
+          db.collection("car").get().then((querySnapshot) => {
+            empList = [];
+            $('#empListTbl tbody').html("");
+            querySnapshot.forEach((doc) => {
+              var car = doc.data();
+              car.id = doc.id;
+              empList.push(car);
+
+              $('#empListTbl tbody').append(`
+              <tr>
+                <td>${emp.cno}</td>
+                <td><%=emp.name %></td>
+                <td><%=emp.depart %></td>
+                <td><%=emp.position %></td>
+                <td><%=emp.pic %></td>
+                <td><button id="updateBtn">Update</button></td>
+                <td><button id="delBtn">Delete</button></td>
+            </tr>
+              
+              
+            
+              <tr>
+                <td>${car.id}</td>
+                <td>${car.name}</td>
+                <td>${car.company}</td>
+                <td>${car.year}</td>
+                <td>${car.price}</td>
+              </tr>`);
+            });
+
+            $("#empForm").submit(function (evt) {
+              evt.preventDefault();
+              let carData = {
+                name: this.name.value,
+                company: this.company.value,
+                year: this.year.value,
+                price: this.price.value
+              }
+
+              // 입력된 정보를 db에 저장
+              db.collection("car").add(carData).then((docRef) => {
+                // 저장 후 테이블 리스트 갱신
+                mkTable()
+              }).catch((error) => {
+                console.error("Error adding document: ", error);
+              });
+
+            });
+          });
+        }
+
+        mkTable()
+
+      } catch (e) {
+        console.error(e);
+        loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+      }
+    });
+
+
+    var firebaseConfig = {
+      apiKey: "AIzaSyAv05jgyJYXoIlrPxbv-tDaH2QJI7xYNrE",
+      authDomain: "study-21.firebaseapp.com",
+      projectId: "study-21",
+      storageBucket: "study-21.appspot.com",
+      messagingSenderId: "1092886198809",
+      appId: "1:1092886198809:web:abe55a8885a177ce4d0888"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+
+
+</body>
+
+</html>

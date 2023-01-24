@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://getbootstrap.kr/docs/5.1/examples/album/ -->
+<html lang="ko">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
+  <meta name="generator" content="Hugo 0.88.1">
+  <title>Album example · Bootstrap v5.1</title>
+  <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/album/">
+  <!-- Bootstrap core CSS -->
+  <link href="./bootstrap/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" href="https://getbootstrap.kr/docs/5.1/assets/img/favicons/apple-touch-icon.png"
+    sizes="180x180">
+  <link rel="icon" href="https://getbootstrap.kr/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32"
+    type="image/png">
+  <link rel="icon" href="https://getbootstrap.kr/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16"
+    type="image/png">
+  <link rel="manifest" href="https://getbootstrap.kr/docs/5.1/assets/img/favicons/manifest.json">
+  <link rel="mask-icon" href="https://getbootstrap.kr/docs/5.1/assets/img/favicons/safari-pinned-tab.svg"
+    color="#7952b3">
+  <link rel="icon" href="https://getbootstrap.kr/docs/5.1/assets/img/favicons/favicon.ico">
+  <meta name="theme-color" content="#7952b3">
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    #person {
+      float: left;
+      width: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <!-- navbar -->
+    <div class="navbar shadow-sm" style="background-color: rgb(145, 125, 231);">
+      <div class="container">
+        <a href="#" class="navbar-brand d-flex align-items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-house-heart"
+            viewBox="0 0 16 16">
+            <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.309 8 6.982Z" />
+            <path
+              d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.707L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.646a.5.5 0 0 0 .708-.707L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z" />
+          </svg>
+          <strong style="color: white;">&nbsp MYG Hompage</strong>
+        </a>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button class="btn btn-primary" type="button" onclick="location.href='SignIn.html'"
+            style="background-color: rgb(145, 125, 231); border: none; font-size: large; font-weight: bold;">Sign
+            In</button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <!-- 상단 소개 -->
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <img id="person" src="img/person.png">
+          <span class="lead text-muted">Hello, my name is</span>
+          <h1 class="fw-light">Yungyeong Ma</h1>
+          <a href="#" class="btn btn-secondary my-2" style="background-color: rgb(145, 125, 231); border: none;">Hire
+            Me</a>
+        </div>
+      </div>
+    </section>
+    <!-- 갤러리 -->
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="col">
+            <div class="card shadow-sm">
+              <img src="img/1.jpg">
+              <div class="card-body">
+                <h5 style="font-weight: bold; text-align: center;">Frontend</h5>
+                <p class="card-text">React<br>Javascript<br>Node.js<br>HTML/CSS</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-muted">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <img src="img/2.jpg">
+              <div class="card-body">
+                <h5 style="font-weight: bold; text-align: center;">Backend</h5>
+                <p class="card-text">Python<br>MySQL<br><br><br></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-muted">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <img src="img/3.jpg">
+              <div class="card-body">
+                <h5 style="font-weight: bold; text-align: center;">Others</h5>
+                <p class="card-text">C<br>C++<br>Java<br>Linux</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-muted">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="text-muted py-5">
+    <div class="container">
+      <p class="mb-1">© 2022 Company, Inc.</p>
+    </div>
+  </footer>
+  <script src="./Album example · Bootstrap v5.1_files/bootstrap.bundle.min.js.다운로드"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

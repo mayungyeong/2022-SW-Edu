@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=no, maxinum-scale=1, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(161, 161, 229);
+            width: 960px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        /* #menu {
+            float: left;
+            width: 260px;
+        }
+
+        #section {
+            float: right;
+            width: 700px;
+        } */
+
+        #section {
+            clear: both;
+        }
+
+        #menu li {
+            list-style: none;
+            float: left;
+            width: 200px;
+            height: 40px;
+            background-color: rgb(40, 110, 142); 
+            color: white;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        /* 스마트폰 */
+        @media screen and (max-width: 767px) {
+            body {
+                background-color: pink;
+            }
+
+            /* #menu {
+                float: left;
+                width: auto;
+            }
+
+            #section {
+                float: none;
+                width: auto;
+            } */
+
+            #menu li {
+            list-style: none;
+            float: none;
+            width: 200px;
+            height: 40px;
+            background-color: rgb(163, 91, 191);
+            color: white;
+            text-align: center;
+            line-height: 40px;
+        }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="menu">
+        <ul>
+            <li>MenuA</li>
+            <li>MenuB</li>
+            <li>MenuC</li>
+            <li>MenuD</li>
+        </ul>
+    </div>
+    <div id="section">
+        <h1>오리오리</h1>
+        <p>
+            What are CSS Animations?
+            An animation lets an element gradually change from one style to another.<br />
+
+            You can change as many CSS properties you want, as many times as you want.
+
+            To use CSS animation, you must first specify some keyframes for the animation.
+
+            Keyframes hold what styles the element will have at certain times.<br />
+        </p>
+    </div>
+
+</body>
+
+</html>

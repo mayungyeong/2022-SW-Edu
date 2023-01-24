@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #btn {
+      background-color: rgb(255, 255, 0);
+      border: 3px solid rgb(255, 136, 0);
+      margin-top: 10px;
+      width: 60px;
+      height: 40px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    ul.cells {
+      padding: 0;
+      margin: 0;
+      width: 120px;
+      float: left;
+    }
+
+    ul.cells>li {
+      border: 1px solid black;
+      width: 120px;
+      height: 100px;
+      box-sizing: border-box;
+      text-align: center;
+      line-height: 100px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 367px;
+      height: 100px;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  <script>
+    class Hamburger {
+      constructor(box) {
+        this.box = box;
+        this.ul = null;
+        this.init();
+      }
+      init() {
+        this.ul = document.createElement("ul");
+        this.ul.className = "cells";
+        this.ul.id = "ul";
+        this.ul.style.position = "relative";
+        var colors = ['#FE9393', '#FE7734', '#E9EC52', '#9BF67A', '#6BC4E5', '#BB84F6', '#ADF0E6', '#D7C8B7', '#DE8B90'];
+        
+        for (var i = 0; i < 10; i++) {
+          this.li = document.createElement("li");
+          this.li.innerText = i + 1;
+          this.li.style.backgroundColor = colors[i];
+          this.li.style.borderRadius = "5px";
+          this.li.style.fontWeight = "bold";
+          this.ul.appendChild(this.li);
+        }
+        this.box.appendChild(this.ul);
+
+      }
+      start() {
+        var x = 0;
+        var target = Math.abs(Math.floor(Math.random() * 10000 / 100)) * 100;
+        var ul = this.ul;
+
+        var interval = setInterval(() => {
+          x -= 30;
+          ul.style.top = x + "px";
+          if (x <= -(target % 900)) {
+            clearInterval(interval);
+            ul.style.top = -(target % 900) + "px";
+          }
+        }, 1000 / 30);
+      }
+    }
+
+    function main() {
+      var box = document.getElementById("box");
+      new Hamburger(box).start();
+      new Hamburger(box).start();
+      new Hamburger(box).start();
+    }
+
+
+
+    window.addEventListener("load", main);
+
+    window.onload = function () {
+      var hw = document.getElementById('btn');
+      hw.addEventListener('click', function () {
+        for (var i = 0; i < 3; i++) {
+          document.getElementById('ul').remove();
+        }
+        main();
+      })
+    }
+  </script>
+</head>
+
+<body>
+  <h1>햄버거</h1>
+  <hr>
+  <div id="box"></div>
+  <button id="btn">Click !</button>
+</body>
+
+</html>

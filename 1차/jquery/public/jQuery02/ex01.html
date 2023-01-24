@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>jQuery 실습</h1>
+    <div id="box">box</div>
+    <button id="changeBtn">체인지</button>
+
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script>
+        // box에 list추가
+        var fish = ['오징어','꼴뚜기','대구','명태','거북이',];
+        // 1. html 함수 이용
+        $('#box').html("<h2>Hello</h2>");
+        // $('#box').html("<h3>wwww</h3>"); //덮어쓰기 되니까 주의 !!!
+        // html엔 Getters와 Setter 있음. 함께 사용 가능.
+        var html = $('#box').html(); //Getter 기능
+        var txt = $('#box').text();
+        console.log(html); //요소까지 전부 가져옴
+        console.log(txt); //텍스트만 가져옴
+        // $('#box').html($('#box').html() + ("<h3>wwww</h3>");
+        
+        $('button#changeBtn').click(function(e){
+            $('#box').html(`<h2>${$('#box').text()} World </h2>`);
+        });
+    </script>
+</body>
+</html>
